@@ -22,7 +22,7 @@ import java.util.*;
 /**
  * Extended implementation of {@link org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices}
  *
- * By default, it designed to return only user details. This class provides {@link #getRequest(Map)} method, which
+ * By default, it designed to return only entity details. This class provides {@link #getRequest(Map)} method, which
  * returns clientId and scope of calling service. This information used in controller's security checks.
  */
 
@@ -30,7 +30,7 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
 
 	protected final Log logger = LogFactory.getLog(getClass());
 
-	private static final String[] PRINCIPAL_KEYS = new String[] { "user", "username",
+	private static final String[] PRINCIPAL_KEYS = new String[] { "entity", "username",
 			"userid", "user_id", "login", "id", "name" };
 
 	private final String userInfoEndpointUrl;
@@ -110,7 +110,7 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
 
 	@SuppressWarnings({ "unchecked" })
 	private Map<String, Object> getMap(String path, String accessToken) {
-		this.logger.debug("Getting user info from: " + path);
+		this.logger.debug("Getting entity info from: " + path);
 		try {
 			OAuth2RestOperations restTemplate = this.restTemplate;
 			if (restTemplate == null) {
@@ -129,10 +129,10 @@ public class CustomUserInfoTokenServices implements ResourceServerTokenServices 
 			return restTemplate.getForEntity(path, Map.class).getBody();
 		}
 		catch (Exception ex) {
-			this.logger.info("Could not fetch user details: " + ex.getClass() + ", "
+			this.logger.info("Could not fetch entity details: " + ex.getClass() + ", "
 					+ ex.getMessage());
 			return Collections.<String, Object>singletonMap("error",
-					"Could not fetch user details");
+					"Could not fetch entity details");
 		}
 	}
 }

@@ -15,7 +15,7 @@ public interface AccountService {
 
 	/**
 	 * Checks if account with the same name already exists
-	 * Invokes Auth Service user creation
+	 * Invokes Auth Service entity creation
 	 * Creates new account with default parameters
 	 *
 	 * @param user

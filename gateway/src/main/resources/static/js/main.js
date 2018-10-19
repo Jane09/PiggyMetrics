@@ -182,7 +182,7 @@ function hideGreetingUnits() {
     $("#bottombuttons").fadeOut(100);
 }
 
-// Filling user notes
+// Filling entity notes
 function addNotes() {
     $("textarea#notes").val(user.notes);
 }

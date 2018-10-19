@@ -5,7 +5,7 @@ server:
 spring:
   jackson:
     serialization:
-      INDENT_OUT: true
+      INDENT_OUTPUT: true
   data:
     mongodb:
       host: localhost

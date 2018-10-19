@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -33,7 +34,11 @@ public class UserController extends AbstractBaseController {
     @PostAuthorize("returnObject.username == principal.username or hasRole('ROLE_ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public User getUser(@PathVariable String id) {
-        return repository.findById(id).orElseThrow(() -> {throw new BizException("ID没有对应的用户");});
+        Optional<User> optional = repository.findById(id);
+        if(!optional.isPresent()) {
+            throw new BizException("ID没有对应的用户");
+        }
+        return optional.get();
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -46,9 +51,12 @@ public class UserController extends AbstractBaseController {
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     User removeUser(@PathVariable String id) throws Throwable {
-        User deletedUser = repository.findById(id).orElseThrow(() -> {throw new BizException("ID没有对应的用户");});
+        Optional<User> optional = repository.findById(id);
+        if(!optional.isPresent()) {
+            throw new BizException("ID没有对应的用户");
+        }
         repository.deleteById(id);
-        return deletedUser;
+        return optional.get();
     }
 
     @PostAuthorize("returnObject.username == principal.username or hasRole('ROLE_ADMIN')")

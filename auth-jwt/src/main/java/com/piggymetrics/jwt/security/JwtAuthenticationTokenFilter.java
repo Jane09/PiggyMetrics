@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-@SuppressWarnings("SpringJavaAutowiringInspection")
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
     private final UserDetailsService userDetailsService;

@@ -29,7 +29,8 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
     private final JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
     @Autowired
-    public WebSecurityConfig(JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint, @Qualifier("jwtUserDetailsServiceImpl") UserDetailsService userDetailsService,
+    public WebSecurityConfig(JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
+                             @Qualifier("jwtUserDetailsServiceImpl") UserDetailsService userDetailsService,
                              JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter) {
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
         this.userDetailsService = userDetailsService;
